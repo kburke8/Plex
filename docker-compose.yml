@@ -10,9 +10,9 @@ services:
       - PGID=1000
       - VERSION=docker
     volumes:
-      - /path/to/library:/config
-      - /path/to/tvseries:/tv
-      - /path/to/movies:/movies
+      - Z:\docker\data\plex:/config
+      - Z:\docker\data\plex\tv:/tv
+      - Z:\docker\data\plex\movies:/movies
     ports:
       - 32400:32400
       - 32410:32410/udp
@@ -28,9 +28,9 @@ services:
       - PGID=1000
       - TZ=America/Phoenix
     volumes:
-      - /path/to/data:/config
-      - /path/to/tvseries:/tv #optional
-      - /path/to/downloadclient-downloads:/downloads #optional
+      - Z:\docker\data\sonarr:/config
+      - Z:\docker\data\sonarr\tv:/tv #optional
+      - Z:\docker\data\sonarr\downloads:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -42,9 +42,9 @@ services:
       - PGID=1000
       - TZ=America/Phoenix
     volumes:
-      - /path/to/data:/config
-      - /path/to/movies:/movies #optional
-      - /path/to/downloadclient-downloads:/downloads #optional
+      - Z:\docker\data\radarr:/config
+      - Z:\docker\data\radarr\movies:/movies #optional
+      - Z:\docker\data\radarr\downloads:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -56,9 +56,9 @@ services:
       - PGID=1000
       - TZ=America/Phoenix
     volumes:
-      - /path/to/data:/config
-      - /path/to/downloads:/downloads #optional
-      - /path/to/incomplete/downloads:/incomplete-downloads #optional
+      - Z:\docker\data\sabnzbd:/config
+      - Z:\docker\data\sabnzbd\downloads:/downloads #optional
+      - Z:\docker\data\sabnzbd\incomplete:/incomplete-downloads #optional
     ports:
       - 8080:8080
     restart: unless-stopped
