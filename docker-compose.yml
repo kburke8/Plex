@@ -1,0 +1,64 @@
+---
+version: "2.1"
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+    volumes:
+      - /path/to/library:/config
+      - /path/to/tvseries:/tv
+      - /path/to/movies:/movies
+    ports:
+      - 32400:32400
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+    restart: unless-stopped
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Phoenix
+    volumes:
+      - /path/to/data:/config
+      - /path/to/tvseries:/tv #optional
+      - /path/to/downloadclient-downloads:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Phoenix
+    volumes:
+      - /path/to/data:/config
+      - /path/to/movies:/movies #optional
+      - /path/to/downloadclient-downloads:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Phoenix
+    volumes:
+      - /path/to/data:/config
+      - /path/to/downloads:/downloads #optional
+      - /path/to/incomplete/downloads:/incomplete-downloads #optional
+    ports:
+      - 8080:8080
+    restart: unless-stopped
